@@ -7,6 +7,12 @@ router.post("/signup", async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
+    console.log("SIGNUP DATA:", req.body);
+
+    if (!username || !email || !password) {
+      return res.status(400).json("All fields are required");
+    }
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json("User already exists");
@@ -22,18 +28,31 @@ router.post("/signup", async (req, res) => {
 
     await newUser.save();
 
-    res.status(201).json(newUser);
+    res.status(201).json({
+      message: "Signup successful",
+      user: newUser,
+    });
+
   } catch (err) {
+    console.log(err);
     res.status(500).json(err.message);
   }
 });
 
+
 // LOGIN
 router.post("/login", async (req, res) => {
   try {
+    console.log("LOGIN DATA:", req.body);
+
     const { email, password } = req.body;
 
+    if (!email || !password) {
+      return res.status(400).json("Email and password required");
+    }
+
     const user = await User.findOne({ email });
+
     if (!user) {
       return res.status(400).json("User not found");
     }
@@ -44,8 +63,13 @@ router.post("/login", async (req, res) => {
       return res.status(400).json("Wrong password");
     }
 
-    res.status(200).json(user);
+    res.status(200).json({
+      message: "Login successful",
+      user,
+    });
+
   } catch (err) {
+    console.log(err);
     res.status(500).json(err.message);
   }
 });
