@@ -27,10 +27,14 @@ function Login() {
     toast.success("Login Successful 🚀");
     navigate("/feed");
   } catch (err) {
-    console.log("ERROR:", err.response?.data);
-    toast.error(err.response?.data?.message || "Login Failed ❌");
-  }
-};
+  console.log("ERROR FULL:", err.response?.data);
+
+  toast.error(
+    typeof err.response?.data === "string"
+      ? err.response.data
+      : err.response?.data?.message || "Login Failed ❌"
+  );
+}
 
   return (
     <div style={styles.bg}>
