@@ -39,19 +39,19 @@ function Login() {
         <p>Login to continue</p>
 
         <input
-          placeholder="Email"
-          style={styles.input}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+  placeholder="Email"
+  value={email}
+  style={styles.input}
+  onChange={(e) => setEmail(e.target.value)}
+/>
 
-        <div style={styles.passBox}>
-          <input
-            placeholder="Password"
-            type={show ? "text" : "password"}
-            style={styles.input}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
+<input
+  placeholder="Password"
+  type={show ? "text" : "password"}
+  value={password}
+  style={styles.input}
+  onChange={(e) => setPassword(e.target.value)}
+/>
           <span onClick={() => setShow(!show)} style={styles.eye}>
             {show ? "🙈" : "👁️"}
           </span>
