@@ -42,17 +42,12 @@ console.log("PASSWORD:", password);
         <p>Login to continue</p>
 
         <input
-  placeholder="Email"
   value={email}
-  style={styles.input}
   onChange={(e) => setEmail(e.target.value)}
 />
 
 <input
-  placeholder="Password"
-  type={show ? "text" : "password"}
   value={password}
-  style={styles.input}
   onChange={(e) => setPassword(e.target.value)}
 />
           <span onClick={() => setShow(!show)} style={styles.eye}>
