@@ -11,20 +11,26 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    try {
-      const res = await api.post("/auth/login", {
-        email,
-        password,
-      });
+  try {
+    console.log("EMAIL:", email);
+    console.log("PASSWORD:", password);
 
-      localStorage.setItem("user", JSON.stringify(res.data));
+    const res = await api.post("/auth/login", {
+      email,
+      password,
+    });
 
-      toast.success("Login Successful 🚀");
-      navigate("/feed");
-    } catch (err) {
-      toast.error("Login Failed ❌");
-    }
-  };
+    console.log("RESPONSE:", res.data);
+
+    localStorage.setItem("user", JSON.stringify(res.data));
+
+    toast.success("Login Successful 🚀");
+    navigate("/feed");
+  } catch (err) {
+    console.log("ERROR:", err.response?.data);
+    toast.error(err.response?.data?.message || "Login Failed ❌");
+  }
+};
 
   return (
     <div style={styles.bg}>
